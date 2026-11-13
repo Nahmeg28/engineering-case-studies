@@ -24,15 +24,17 @@ Restaurants need more than one till to keep working: waiters, cashiers and kitch
 The app runs in one of four modes: **online**, **offline** (single till), **LAN via a branch PC**, or **LAN via an Android till**.
 
 ```mermaid
-flowchart LR
-    subgraph Branch["Branch network"]
-        H["Host till<br/>(Android, foreground service)<br/>HTTP server + encrypted SQLite"]
-        T1["Till 2"] --> H
-        T2["Till 3"] --> H
-        K["Kitchen screens"] --> H
+flowchart TB
+    subgraph Branch["Branch network: keeps working with no internet"]
+        T2["Till 2"]
+        T3["Till 3"]
+        K["Kitchen screens"]
+        H["Host till<br/>local HTTP server<br/>encrypted SQLite"]
+        T2 --> H
+        T3 --> H
+        K --> H
     end
-    H -- "outbox: finished sales only" --> ERP[("Central ERP")]
-    ERP -. "reachability check<br/>(ERP itself, not just internet)" .- H
+    H -->|"syncs finished sales<br/>when the ERP is reachable"| ERP[("Central ERP")]
 ```
 
 - **Storage:** moved local data from a key-value cache to **encrypted SQLite**. Existing data migrates as a stream, so it never sits in memory all at once.

@@ -15,13 +15,13 @@ A second problem: once a driver accepted an order, the app stopped listening for
 
 ```mermaid
 flowchart TD
-    Trip["Trip starts"] --> Cache{"Route cached<br/>for this order + leg?"}
-    Cache -- yes --> Show["Show route"]
-    Cache -- no --> P["Primary provider"]
-    P -- success --> Store["Cache route"] --> Show
-    P -- "transient error<br/>(timeout, network)" --> Retry["Retry with backoff + jitter"]
-    Retry -- "still failing" --> B["Backup provider"]
-    P -- "no route found" --> B
+    Trip["Trip starts"] --> Cache{"Route cached?"}
+    Cache -->|yes| Show["Show route"]
+    Cache -->|no| P["Primary provider"]
+    P -->|success| Store["Cache route"] --> Show
+    P -->|"timeout or network error"| Retry["Retry with backoff and jitter"]
+    Retry -->|"still failing"| B["Backup provider"]
+    P -->|"no route found"| B
     B --> Store
     B --> Notify["Tell the driver: fallback in use"]
 ```
