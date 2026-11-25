@@ -12,7 +12,10 @@ The production code belongs to my employer and stays private. These documents co
 | 04 | [From a Unilever order to a fiscal receipt, unattended](04-unilever-order-pipeline.md) | CNDroid POS | Third-party integration, polling, fiscal hardware, partial failure |
 | 05 | [Making the fiscal printer and the ERP agree](05-fiscal-reconciliation.md) | CNDroid POS | Data consistency, decision tables, race conditions |
 | 06 | [Debugging notebook: five production bugs](06-debugging-notebook.md) | CNDroid POS | Root-cause analysis, including two bugs I caused |
+| 07 | [E-invoicing with the tax authority's signed QR](07-e-invoicing-signed-qr.md) | CNDroid POS | Government integration, printer selection, failing early |
 
 **Everything I shipped, release by release:** [CONTRIBUTIONS.md](CONTRIBUTIONS.md)
 
-More to come: e-invoicing with the tax authority's signed QR, HuluBeje inside Bank of Abyssinia's app, and short engineering notes.
+**Shorter design decisions:** [engineering notes](engineering-notes/README.md)
+
+More to come: HuluBeje (super-app) work.
